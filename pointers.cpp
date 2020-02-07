@@ -14,7 +14,7 @@ void calculateStudentAverage(void *object, double *avg);
 
 int main(int argc, char **argv)
 {
-    Student student;
+    Student *student;
     double average;
 
     //holder variables for the strings:
@@ -30,43 +30,43 @@ int main(int argc, char **argv)
     //Student id: 
     std::cout << "Please enter the student's id number: ";
     std::cin >> in_id;
-    student.id = in_id;
+    student->id = in_id;
 
     //Student First name:
     std::cout << "Please enter the student's first name: ";
     std::cin >> first;
-    student.f_name = first;
+    student->f_name = first;
 
     //Student Last name:
     std::cout << "Please enter the student's last name: ";
     std::cin >> last;
-    student.l_name = last;
+    student->l_name = last;
 
     //Number of Assignments:
-    std::cout << "Please enter how many assignments were graded: ";
-    //bool ask = true;
-    /*while(true)
+    bool ask = true;
+    while(ask)
     {
-        if(std::isdigit(assignments) != 0)
+        std::cout << "Please enter how many assignments were graded: ";
+        std::cin >> assignments;
+       /* if(std::cin.fail())
         {
             std::cout << "Sorry, I cannot understand your answer\n";
-            std::cout << "Please enter how many assignments were graded: ";
-            std::cin >> assignments;
+        }    */
+        if(assignments < 1)
+        {
+            std::cout << "Sorry, I cannot understand your answer\n";
         }
         else
         {
             ask = false;
         }
-    }*/
-    std::cin >>assignments; 
-    //error checking: 
-    //if assignments has a non-digit value, reask until a correct input is provided
-    student.n_assignments = assignments; 
+    }
+    
+    student->n_assignments = assignments; 
     std::cout <<"\n";
 
-    //malloc the space for the double array 
-    //student.grades = (double*)malloc((assignments)*sizeof(double));
-    student.grades = new double [assignments];
+    //Ask for grades: 
+    student->grades = new double [assignments];
     double grade;
     for(int i = 0; i < assignments; i ++)
     {
@@ -88,10 +88,11 @@ int main(int argc, char **argv)
             }  
         }
         
-        student.grades[i] = grade;
+        student->grades[i] = grade;
     }    
 
     // Call `CalculateStudentAverage(???, &average)`
+    calculateStudentAverage(student->grades,&average);
     // Output `average`
 
     return 0;
@@ -100,12 +101,17 @@ int main(int argc, char **argv)
 void calculateStudentAverage(void *object, double *avg)
 {
     double calc; 
+    
+    std::cout << "size of object: " << sizeof(object) << "\n";
+
     // Code to calculate and store average grade
 
     //when the average is calculated, we are editing the average value
     //that is passed, which is the double average defined within main
     //rather than returning a value to be stored within the variable 
     //in main
+
+
 
     //post math = 
     // *avg = calc;
