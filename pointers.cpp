@@ -48,10 +48,13 @@ int main(int argc, char **argv)
     {
         std::cout << "Please enter how many assignments were graded: ";
         std::cin >> assignments;
-       /* if(std::cin.fail())
+       // string assign_check = std::to_string(assignments);
+        //std::cout <<" assign check, alpha output" << all(assignments,isalpha());
+
+       /*if(std::cin.fail())
         {
             std::cout << "Sorry, I cannot understand your answer\n";
-        }    */
+        }  */ 
         if(assignments < 1)
         {
             std::cout << "Sorry, I cannot understand your answer\n";
