@@ -127,6 +127,7 @@ void calculateStudentAverage(void *object, double *avg)
         add += hold->grades[i];
     } 
 
+    //for rounding: 
     *avg = add / hold->n_assignments;
     *avg = floor(*avg / scale + 0.5) * scale;
 }
