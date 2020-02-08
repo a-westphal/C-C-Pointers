@@ -52,13 +52,26 @@ int main(int argc, char **argv)
     bool check = true;
     int index = 0;
 
-
-
     while(ask)
     {
         std::cout << "Please enter how many assignments were graded: ";
         std::cin >> assignments;
         std::cout << " assignments: " << assignments;
+        while(check)
+        {
+            if(assignments[index] >= 65 || assignments[index] <= 90 || assignments[index] >= 96 || assignments[index] <= 122)
+            {
+                //ascii values of a character
+                check = false;
+                std::cout << "assignments of index: " << index << " is: " << assignments[index] << std::endl;
+                std::cout << "Sorry, I cannot understand your answer\n";
+                std::cout << "Please enter how many assignments were graded: ";
+                std::cin >> assignments;
+
+            }
+
+            index += 1; 
+        } 
         
         if(atoi(assignments) < 1)
         {
