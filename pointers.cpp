@@ -70,10 +70,11 @@ int main(int argc, char **argv)
             }
             else if (assignments[index+1] == '\0')
             {
-            	//end the loop if there haven't been any issues: 
+            	/* end the loop if there haven't been any issues and we're at the end 
+            		of the string: */ 
             	check = false;
             }
-            else if (!found)
+            else
             {
             	index+=1;
             }
