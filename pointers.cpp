@@ -22,14 +22,14 @@ int main(int argc, char **argv)
     int in_id;          //inputted id number
     char *first;        //inputted first name
     char *last;         //inputted last name
-    char *assignments;    //inputted assignment number
-    int assign;
+    char *assignments;	//inputted assignment number
+    int assign;			//numerical assignment count
+    //std::string assignments;
 
     first = (char*)malloc((129)*sizeof(char));
     last = (char*)malloc((129)*sizeof(char));
     assignments = (char*)malloc((129)*sizeof(char));
 
-    // Sequence of user input -> store in fields of `student`
     //Student id: 
     std::cout << "Please enter the student's id number: ";
     std::cin >> in_id;
@@ -46,42 +46,50 @@ int main(int argc, char **argv)
     student->l_name = last;
 
     //Number of Assignments:
-    /* store the assignments as a string or array of chars to be checked 
-        for letters */
-    bool ask = true;
-    bool check = true;
-    int index = 0;
+    bool ask = true;	//loop flag for asking for the assignment
+    bool check = true;	//loop flag for checking for letters in the input
+    int index = 0;		//indexing variable for letters in the input
 
+    //asking loop:
     while(ask)
     {
         std::cout << "Please enter how many assignments were graded: ";
         std::cin >> assignments;
-        std::cout << " assignments: " << assignments;
+
+        //check for letters in the input
         while(check)
         {
-            if(assignments[index] >= 65 || assignments[index] <= 90 || assignments[index] >= 96 || assignments[index] <= 122)
+            if((assignments[index] >= 65 && assignments[index] <= 90) || (assignments[index] >= 96 && assignments[index] <= 122))
             {
-                //ascii values of a character
-                check = false;
-                std::cout << "assignments of index: " << index << " is: " << assignments[index] << std::endl;
+                //ascii values of a characters (a-z) & (A-Z)
                 std::cout << "Sorry, I cannot understand your answer\n";
                 std::cout << "Please enter how many assignments were graded: ";
                 std::cin >> assignments;
-
+                //reset the index counter: 
+                index = 0;		
             }
-
-            index += 1; 
+            else if (assignments[index+1] == '\0')
+            {
+            	//end the loop if there haven't been any issues: 
+            	check = false;
+            }
+            else if (!found)
+            {
+            	index+=1;
+            }
         } 
         
+        //if theres less than one assignment:
         if(atoi(assignments) < 1)
         {
             std::cout << "Sorry, I cannot understand your answer\n";
         }
+
+        //input is all good:
         else
         {
             ask = false;
             assign = atoi(assignments);
-
         }
     }
     
@@ -99,12 +107,15 @@ int main(int argc, char **argv)
 
         while(reask)
         {
+        	//error checking for grades:
             if(grade > 1000.00 || grade <= 0)
             {
                 std::cout << "Sorry, I cannot understand your answer\n";
                 std::cout << "Please enter grade for assignment " << i << ": ";
                 std::cin >> grade; 
             }
+
+            //input is all good:
             else 
             {
                 reask = false;
